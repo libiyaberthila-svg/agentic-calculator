@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduPulse — Modern Student Management System</title>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div class="brand-text">
+          <h2>EduPulse</h2>
+          <span>Student Portal</span>
+        </div>
+        <button class="mobile-close-btn" id="sidebarClose"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">MAIN MENU</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#dashboard" class="nav-link active" data-tab="dashboard">
+              <i class="fa-solid fa-chart-pie"></i>
+              <span>Dashboard</span>
+              <span class="badge badge-accent">Live</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#attendance" class="nav-link" data-tab="attendance">
+              <i class="fa-solid fa-calendar-check"></i>
+              <span>Attendance</span>
+              <span class="badge badge-primary">94.8%</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#profile" class="nav-link" data-tab="profile">
+              <i class="fa-solid fa-id-card"></i>
+              <span>Student Profile</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="nav-section-label">ACADEMIC & TOOLS</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link disabled-feature" title="Demo Feature">
+              <i class="fa-solid fa-book-open-reader"></i>
+              <span>Courses & Grades</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link disabled-feature" title="Demo Feature">
+              <i class="fa-solid fa-file-invoice-dollar"></i>
+              <span>Fees & Billing</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link disabled-feature" title="Demo Feature">
+              <i class="fa-solid fa-bell"></i>
+              <span>Announcements</span>
+              <span class="badge badge-warning">3</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link disabled-feature" title="Demo Feature">
+              <i class="fa-solid fa-sliders"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar User Badge -->
+      <div class="sidebar-footer">
+        <div class="current-user">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Admin Avatar" class="user-avatar">
+          <div class="user-info">
+            <h4>Dr. Eleanor Vance</h4>
+            <p>Dean of Academics</p>
+          </div>
+          <button class="logout-btn" title="Sign Out"><i class="fa-solid fa-right-from-bracket"></i></button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+      <!-- Top Navbar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="global-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="globalSearchInput" placeholder="Search students by name, roll no, or department...">
+            <span class="search-shortcut">⌘K</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="academic-term-chip">
+            <i class="fa-regular fa-calendar"></i>
+            <span>Fall 2025 – Term 1</span>
+          </div>
+
+          <div class="quick-icon-btn notifications-btn" id="notificationBtn" title="3 New Notifications">
+            <i class="fa-regular fa-bell"></i>
+            <span class="notification-indicator"></span>
+          </div>
+
+          <div class="quick-icon-btn" title="Quick Theme Switcher" id="themeToggleBtn">
+            <i class="fa-regular fa-moon" id="themeIcon"></i>
+          </div>
+
+          <div class="header-profile-pill" id="quickProfileBtn">
+            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=120&q=80" alt="Student Profile Preview">
+            <div class="pill-text">
+              <span class="pill-name">Alex Rivera</span>
+              <span class="pill-role">CS-2023-882</span>
+            </div>
+            <i class="fa-solid fa-chevron-down pill-chevron"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Dynamic Content Views -->
+      <main class="content-container">
+
+        <!-- ==============================================
+             SECTION 1: DASHBOARD
+             ============================================== -->
+        <section id="dashboardSection" class="content-section active">
+          <!-- Welcome Hero Banner -->
+          <div class="hero-welcome-card">
+            <div class="hero-content">
+              <div class="hero-badge"><i class="fa-solid fa-sparkles"></i> Welcome back, Dean Vance</div>
+              <h1>Department of Computer Science & Engineering</h1>
+              <p>Academic year 2025–26 session is ongoing. 94.8% average attendance reported across 8 batches today.</p>
+              <div class="hero-actions">
+                <button class="btn btn-primary" onclick="switchTab('attendance')">
+                  <i class="fa-solid fa-clipboard-user"></i> Quick Mark Attendance
+                </button>
+                <button class="btn btn-secondary" onclick="openStudentModal()">
+                  <i class="fa-solid fa-user-plus"></i> Enroll New Student
+                </button>
+              </div>
+            </div>
+            <div class="hero-stats-mini">
+              <div class="mini-stat">
+                <span class="label">Term Progress</span>
+                <span class="value">64%</span>
+                <div class="progress-bar-small"><div class="fill" style="width: 64%;"></div></div>
+              </div>
+              <div class="mini-stat">
+                <span class="label">Next Exam Session</span>
+                <span class="value">Nov 14</span>
+                <span class="subtext">Mid-Semester Evaluations</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Analytics Stats Grid -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-wrapper bg-indigo">
+                <i class="fa-solid fa-users"></i>
+              </div>
+              <div class="stat-meta">
+                <span class="stat-title">Total Enrolled</span>
+                <div class="stat-val-group">
+                  <h3 class="stat-value">1,428</h3>
+                  <span class="stat-trend trend-up"><i class="fa-solid fa-arrow-up"></i> +12%</span>
+                </div>
+                <span class="stat-footnote">Across 4 UG Batches</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-wrapper bg-emerald">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+              <div class="stat-meta">
+                <span class="stat-title">Today's Attendance</span>
+                <div class="stat-val-group">
+                  <h3 class="stat-value">94.8%</h3>
+                  <span class="stat-trend trend-up"><i class="fa-solid fa-arrow-up"></i> +2.4%</span>
+                </div>
+                <span class="stat-footnote">1,354 students present</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-wrapper bg-amber">
+                <i class="fa-solid fa-award"></i>
+              </div>
+              <div class="stat-meta">
+                <span class="stat-title">Average CGPA</span>
+                <div class="stat-val-group">
+                  <h3 class="stat-value">3.74</h3>
+                  <span class="stat-trend trend-up"><i class="fa-solid fa-arrow-up"></i> +0.08</span>
+                </div>
+                <span class="stat-footnote">Grading scale 4.0</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-wrapper bg-rose">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+              </div>
+              <div class="stat-meta">
+                <span class="stat-title">Attendance Alerts</span>
+                <div class="stat-val-group">
+                  <h3 class="stat-value">14</h3>
+                  <span class="stat-trend trend-down"><i class="fa-solid fa-arrow-down"></i> -3</span>
+                </div>
+                <span class="stat-footnote">Below 75% threshold</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mid Dashboard: Charts & Highlights Grid -->
+          <div class="dashboard-split-grid">
+            <!-- Attendance & Performance Visualizer -->
+            <div class="dashboard-card visualizer-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Weekly Attendance Trends</h3>
+                  <p class="card-subtitle">Aggregated daily presence rate for active departments</p>
+                </div>
+                <div class="card-actions">
+                  <span class="pill-chip active">Last 7 Days</span>
+                  <span class="pill-chip">Semester</span>
+                </div>
+              </div>
+              
+              <div class="bar-chart-container">
+                <div class="chart-bars-wrap">
+                  <div class="bar-col">
+                    <div class="bar-tooltip">Mon: 96%</div>
+                    <div class="bar" style="height: 96%;"><span class="bar-percent">96%</span></div>
+                    <span class="bar-label">Mon</span>
+                  </div>
+                  <div class="bar-col">
+                    <div class="bar-tooltip">Tue: 92%</div>
+                    <div class="bar" style="height: 92%;"><span class="bar-percent">92%</span></div>
+                    <span class="bar-label">Tue</span>
+                  </div>
+                  <div class="bar-col">
+                    <div class="bar-tooltip">Wed: 98%</div>
+                    <div class="bar highlight-bar" style="height: 98%;"><span class="bar-percent">98%</span></div>
+                    <span class="bar-label">Wed</span>
+                  </div>
+                  <div class="bar-col">
+                    <div class="bar-tooltip">Thu: 94%</div>
+                    <div class="bar" style="height: 94%;"><span class="bar-percent">94%</span></div>
+                    <span class="bar-label">Thu</span>
+                  </div>
+                  <div class="bar-col">
+                    <div class="bar-tooltip">Fri: 95%</div>
+                    <div class="bar" style="height: 95%;"><span class="bar-percent">95%</span></div>
+                    <span class="bar-label">Fri</span>
+                  </div>
+                  <div class="bar-col">
+                    <div class="bar-tooltip">Sat: 89%</div>
+                    <div class="bar" style="height: 89%;"><span class="bar-percent">89%</span></div>
+                    <span class="bar-label">Sat</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chart-legend-row">
+                <div class="legend-item"><span class="legend-dot bg-indigo"></span> Present (Above 90%)</div>
+                <div class="legend-item"><span class="legend-dot bg-amber"></span> Notice Zone (75% - 89%)</div>
+                <div class="legend-item"><span class="legend-dot bg-rose"></span> Critical (&lt; 75%)</div>
+              </div>
+            </div>
+
+            <!-- Department Quick Notices & Events -->
+            <div class="dashboard-card events-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Campus Bulletin</h3>
+                  <p class="card-subtitle">Recent administrative events</p>
+                </div>
+                <a href="javascript:void(0)" class="view-all-link">View All</a>
+              </div>
+              <div class="notice-list">
+                <div class="notice-item">
+                  <div class="notice-icon bg-indigo"><i class="fa-solid fa-flask"></i></div>
+                  <div class="notice-info">
+                    <h4>Hackathon Registration Open</h4>
+                    <p>Annual CodeForge Hackathon registration ends this Friday.</p>
+                    <span class="time"><i class="fa-regular fa-clock"></i> 2 hours ago • CS Labs</span>
+                  </div>
+                </div>
+                <div class="notice-item">
+                  <div class="notice-icon bg-emerald"><i class="fa-solid fa-graduation-cap"></i></div>
+                  <div class="notice-info">
+                    <h4>Mid-Term Results Uploaded</h4>
+                    <p>CS-302 Algorithm and Data Structures grade sheet available.</p>
+                    <span class="time"><i class="fa-regular fa-clock"></i> Yesterday • Exam Cell</span>
+                  </div>
+                </div>
+                <div class="notice-item">
+                  <div class="notice-icon bg-amber"><i class="fa-solid fa-calendar-day"></i></div>
+                  <div class="notice-info">
+                    <h4>Academic Holiday Notice</h4>
+                    <p>Campus will remain closed on Oct 12 for Cultural Festival.</p>
+                    <span class="time"><i class="fa-regular fa-clock"></i> Oct 06 • Office of Registrar</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom: Student Roster Overview Table -->
+          <div class="dashboard-card full-width-card">
+            <div class="card-header flex-header">
+              <div>
+                <h3 class="card-title">Recent Students Directory</h3>
+                <p class="card-subtitle">Quick view of enrolled students, performance, and current status</p>
+              </div>
+              <div class="table-toolbar">
+                <div class="filter-dropdown-wrapper">
+                  <select id="departmentFilter" class="filter-select">
+                    <option value="all">All Majors</option>
+                    <option value="CS">Computer Science</option>
+                    <option value="AI">Artificial Intelligence</option>
+                    <option value="DS">Data Science</option>
+                    <option value="SE">Software Engineering</option>
+                  </select>
+                </div>
+                <button class="btn btn-outline" onclick="exportDirectoryCSV()">
+                  <i class="fa-solid fa-file-arrow-down"></i> Export
+                </button>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="custom-table" id="dashboardStudentsTable">
+                <thead>
+                  <tr>
+                    <th>Student Name & ID</th>
+                    <th>Major & Year</th>
+                    <th>Attendance</th>
+                    <th>CGPA</th>
+                    <th>Academic Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboardTableBody">
+                  <!-- Generated dynamically via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==============================================
+             SECTION 2: ATTENDANCE MANAGEMENT
+             ============================================== -->
+        <section id="attendanceSection" class="content-section">
+          <!-- Attendance Banner & Quick Stats -->
+          <div class="attendance-top-bar">
+            <div class="attendance-title-box">
+              <h2>Attendance Control Center</h2>
+              <p>Review real-time presence, toggle student marks, or export verification rosters.</p>
+            </div>
+            <div class="attendance-date-picker">
+              <label for="attendanceDatePicker"><i class="fa-regular fa-calendar-days"></i> Select Date:</label>
+              <input type="date" id="attendanceDatePicker" value="2025-10-08">
+            </div>
+          </div>
+
+          <!-- Attendance Snapshot Cards -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-wrapper bg-emerald">
+                <i class="fa-solid fa-user-check"></i>
+              </div>
+              <div class="stat-meta">
+                <span class="stat-title">Present Count</span>
+                <div class="stat-val-group">
+                  <h3 class="stat-value" id="presentCount">38</h3>
+                  <span class="stat-trend trend-up">92.7%</span>
+                </div>
+                <span class="stat-footnote">On-time in class</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-wrapper bg-amber">
+                <i class="fa-solid fa-user-clock"></i>
+              </div>
+              <div class="stat-meta">
+                <span class="stat-title">Late Arrivals</span>
+                <div class="stat-val-group">
+                  <h3 class="stat-value" id="lateCount">2</h3>
+                  <span class="stat-trend">4.8%</span>
+                </div>
+                <span class="stat-footnote">Within 15 mins grace</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-wrapper bg-rose">
+                <i class="fa-solid fa-user-xmark"></i>
+              </div>
+              <div class="stat-meta">
+                <span class="stat-title">Absent Today</span>
+                <div class="stat-val-group">
+                  <h3 class="stat-value" id="absentCount">1</h3>
+                  <span class="stat-trend trend-down">2.5%</span>
+                </div>
+                <span class="stat-footnote">Unexcused</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-wrapper bg-indigo">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <div class="stat-meta">
+                <span class="stat-title">Approved Leave</span>
+                <div class="stat-val-group">
+                  <h3 class="stat-value" id="excusedCount">1</h3>
+                  <span class="stat-trend">Excused</span>
+                </div>
+                <span class="stat-footnote">Medical / Event pass</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Subject wise attendance cards -->
+          <div class="dashboard-card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Subject-Wise Attendance Metrics</h3>
+                <p class="card-subtitle">Semester current averages for 3rd Year Batch B</p>
+              </div>
+              <span class="badge badge-accent">Batch CS-2023</span>
+            </div>
+            <div class="subject-progress-grid">
+              <div class="subject-progress-card">
+                <div class="subject-header">
+                  <span class="subject-title">CS301: Advanced Algorithms</span>
+                  <span class="subject-score">96.4%</span>
+                </div>
+                <div class="progress-bar-small">
+                  <div class="fill bg-emerald" style="width: 96.4%;"></div>
+                </div>
+                <span class="subject-footer">Prof. David Martinez • 28/29 Present</span>
+              </div>
+
+              <div class="subject-progress-card">
+                <div class="subject-header">
+                  <span class="subject-title">CS304: Database Systems</span>
+                  <span class="subject-score">93.1%</span>
+                </div>
+                <div class="progress-bar-small">
+                  <div class="fill bg-indigo" style="width: 93.1%;"></div>
+                </div>
+                <span class="subject-footer">Dr. Sarah Connor • 27/29 Present</span>
+              </div>
+
+              <div class="subject-progress-card">
+                <div class="subject-header">
+                  <span class="subject-title">AI310: Neural Networks</span>
+                  <span class="subject-score">98.0%</span>
+                </div>
+                <div class="progress-bar-small">
+                  <div class="fill bg-emerald" style="width: 98%;"></div>
+                </div>
+                <span class="subject-footer">Prof. Michael Chen • 29/29 Present</span>
+              </div>
+
+              <div class="subject-progress-card">
+                <div class="subject-header">
+                  <span class="subject-title">MA302: Discrete Mathematics</span>
+                  <span class="subject-score">86.2%</span>
+                </div>
+                <div class="progress-bar-small">
+                  <div class="fill bg-amber" style="width: 86.2%;"></div>
+                </div>
+                <span class="subject-footer">Dr. Anita Roy • 25/29 Present</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Attendance Table -->
+          <div class="dashboard-card">
+            <div class="card-header flex-header">
+              <div>
+                <h3 class="card-title">Daily Attendance Register</h3>
+                <p class="card-subtitle">Click to toggle status (Present, Late, Absent, Excused)</p>
+              </div>
+              <div class="table-toolbar">
+                <button class="btn btn-outline" id="markAllPresentBtn">
+                  <i class="fa-solid fa-check-double"></i> Mark All Present
+                </button>
+                <button class="btn btn-primary" id="saveAttendanceBtn">
+                  <i class="fa-solid fa-floppy-disk"></i> Save & Lock Register
+                </button>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="custom-table" id="attendanceTable">
+                <thead>
+                  <tr>
+                    <th>Roll No</th>
+                    <th>Student</th>
+                    <th>Semester Track</th>
+                    <th>Overall Rate</th>
+                    <th>Status Selector</th>
+                    <th>Remarks</th>
+                  </tr>
+                </thead>
+                <tbody id="attendanceTableBody">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==============================================
+             SECTION 3: STUDENT PROFILE
+             ============================================== -->
+        <section id="profileSection" class="content-section">
+          <!-- Profile Student Selector Banner -->
+          <div class="profile-switch-bar">
+            <span>Viewing Student:</span>
+            <select id="profileStudentSelect" class="student-picker">
+              <!-- Dynamically populated options -->
+            </select>
+            <button class="btn btn-secondary btn-sm" onclick="exportStudentReport()">
+              <i class="fa-solid fa-print"></i> Print Transcript
+            </button>
+            <button class="btn btn-primary btn-sm" onclick="toggleEditProfile()">
+              <i class="fa-solid fa-user-pen"></i> Edit Profile
+            </button>
+          </div>
+
+          <!-- Main Profile Container -->
+          <div class="profile-layout-grid">
+            <!-- Left Profile Column: Identity Card -->
+            <div class="profile-sidebar-card">
+              <div class="profile-cover-photo"></div>
+              <div class="profile-avatar-wrap">
+                <img id="profileAvatar" src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" alt="Student Profile Picture">
+                <span class="online-indicator" title="Active in Campus Network"></span>
+              </div>
+              
+              <div class="profile-identity-info">
+                <h2 id="profileName">Alex Rivera</h2>
+                <span class="profile-student-id" id="profileRollNo">Roll No: CS-2023-882</span>
+                <span class="profile-department" id="profileDept">B.Tech - Computer Science & Engineering</span>
+                <span class="profile-honor-badge"><i class="fa-solid fa-star"></i> Dean's Honor Roll</span>
+              </div>
+
+              <div class="profile-quick-stats">
+                <div class="p-stat">
+                  <span class="p-stat-val" id="profileGPA">3.92</span>
+                  <span class="p-stat-label">CGPA</span>
+                </div>
+                <div class="p-stat">
+                  <span class="p-stat-val" id="profileAttendance">97.4%</span>
+                  <span class="p-stat-label">Attendance</span>
+                </div>
+                <div class="p-stat">
+                  <span class="p-stat-val">6th</span>
+                  <span class="p-stat-label">Semester</span>
+                </div>
+              </div>
+
+              <hr class="divider">
+
+              <!-- Contact & Social Details -->
+              <div class="profile-contact-list">
+                <div class="contact-item">
+                  <i class="fa-solid fa-envelope"></i>
+                  <div class="c-info">
+                    <span class="label">Email Address</span>
+                    <span class="val" id="profileEmail">alex.rivera@university.edu</span>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <i class="fa-solid fa-phone"></i>
+                  <div class="c-info">
+                    <span class="label">Mobile Number</span>
+                    <span class="val" id="profilePhone">+1 (555) 234-8901</span>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <i class="fa-solid fa-location-dot"></i>
+                  <div class="c-info">
+                    <span class="label">Campus Residence</span>
+                    <span class="val" id="profileResidence">North Quad Dorm, Hall B - Room 314</span>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <i class="fa-solid fa-shield-heart"></i>
+                  <div class="c-info">
+                    <span class="label">Blood Group</span>
+                    <span class="val" id="profileBlood">O Positive (O+)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick action links -->
+              <div class="profile-quick-actions">
+                <button class="btn btn-outline full-width" onclick="showToast('Message sent to Alex Rivera', 'info')">
+                  <i class="fa-regular fa-paper-plane"></i> Send Direct Message
+                </button>
+              </div>
+            </div>
+
+            <!-- Right Profile Column: Academic & Administrative Data -->
+            <div class="profile-main-body">
+              <!-- Tabs inside Profile -->
+              <div class="profile-tabs-header">
+                <button class="p-tab-btn active" data-ptab="overview">Academic Records</button>
+                <button class="p-tab-btn" data-ptab="courses">Enrolled Courses (5)</button>
+                <button class="p-tab-btn" data-ptab="guardian">Guardian & Emergency</button>
+                <button class="p-tab-btn" data-ptab="history">Activity Log</button>
+              </div>
+
+              <!-- Profile Sub-Tab 1: Overview -->
+              <div class="profile-sub-section active" id="ptab-overview">
+                <!-- Academic Credentials Box -->
+                <div class="info-card">
+                  <h3 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Academic Overview</h3>
+                  <div class="info-grid">
+                    <div class="info-item">
+                      <span class="info-label">Admitted Session</span>
+                      <span class="info-value">Autumn 2023</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Current Academic Level</span>
+                      <span class="info-value">Junior (Year 3)</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Major Concentration</span>
+                      <span class="info-value">Systems & AI Engineering</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Faculty Advisor</span>
+                      <span class="info-value">Dr. Marcus Sterling</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Completed Credits</span>
+                      <span class="info-value">94 / 130 Required</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Scholarship Status</span>
+                      <span class="info-value text-success"><i class="fa-solid fa-circle-check"></i> Merit Fellow (85% Waiver)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Semester GPA Progress Card -->
+                <div class="info-card">
+                  <h3 class="section-title"><i class="fa-solid fa-chart-line"></i> Semester GPA Track Record</h3>
+                  <div class="gpa-track-list">
+                    <div class="gpa-track-item">
+                      <span class="sem">Sem 1 (Fall '23)</span>
+                      <div class="progress-bar-small"><div class="fill bg-indigo" style="width: 92%;"></div></div>
+                      <span class="grade-score">3.70 / 4.0</span>
+                    </div>
+                    <div class="gpa-track-item">
+                      <span class="sem">Sem 2 (Spr '24)</span>
+                      <div class="progress-bar-small"><div class="fill bg-indigo" style="width: 95%;"></div></div>
+                      <span class="grade-score">3.82 / 4.0</span>
+                    </div>
+                    <div class="gpa-track-item">
+                      <span class="sem">Sem 3 (Fall '24)</span>
+                      <div class="progress-bar-small"><div class="fill bg-indigo" style="width: 97%;"></div></div>
+                      <span class="grade-score">3.88 / 4.0</span>
+                    </div>
+                    <div class="gpa-track-item">
+                      <span class="sem">Sem 4 (Spr '25)</span>
+                      <div class="progress-bar-small"><div class="fill bg-emerald" style="width: 98%;"></div></div>
+                      <span class="grade-score">3.94 / 4.0</span>
+                    </div>
+                    <div class="gpa-track-item">
+                      <span class="sem">Sem 5 (Current)</span>
+                      <div class="progress-bar-small"><div class="fill bg-emerald" style="width: 98%;"></div></div>
+                      <span class="grade-score">3.92 (Projected)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Badges & Achievements -->
+                <div class="info-card">
+                  <h3 class="section-title"><i class="fa-solid fa-medal"></i> Badges & Certifications</h3>
+                  <div class="badge-chip-cloud">
+                    <span class="skill-tag"><i class="fa-solid fa-award"></i> Dean's List (4 Semesters)</span>
+                    <span class="skill-tag"><i class="fa-solid fa-code"></i> ACM ICPC Regional Finalist</span>
+                    <span class="skill-tag"><i class="fa-solid fa-robot"></i> PyTorch Deep Learning Cert</span>
+                    <span class="skill-tag"><i class="fa-solid fa-users"></i> Peer Tutor (Data Structures)</span>
+                    <span class="skill-tag"><i class="fa-solid fa-shield-halved"></i> Cybersecurity Essentials</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Profile Sub-Tab 2: Enrolled Courses -->
+              <div class="profile-sub-section" id="ptab-courses">
+                <div class="info-card">
+                  <h3 class="section-title"><i class="fa-solid fa-book"></i> Current Semester Enrolled Courses</h3>
+                  <div class="table-responsive">
+                    <table class="custom-table course-table">
+                      <thead>
+                        <tr>
+                          <th>Course Code</th>
+                          <th>Course Title</th>
+                          <th>Credits</th>
+                          <th>Instructor</th>
+                          <th>Attendance</th>
+                          <th>Mid-Grade</th>
+                        </tr>
+                      </thead>
+                      <tbody id="enrolledCoursesTableBody">
+                        <tr>
+                          <td><strong>CS301</strong></td>
+                          <td>Advanced Algorithms & Complexity</td>
+                          <td>4.0</td>
+                          <td>Prof. D. Martinez</td>
+                          <td><span class="badge badge-success">98%</span></td>
+                          <td><span class="grade-pill high">A</span></td>
+                        </tr>
+                        <tr>
+                          <td><strong>CS304</strong></td>
+                          <td>Distributed Database Architecture</td>
+                          <td>3.5</td>
+                          <td>Dr. S. Connor</td>
+                          <td><span class="badge badge-success">94%</span></td>
+                          <td><span class="grade-pill high">A-</span></td>
+                        </tr>
+                        <tr>
+                          <td><strong>AI310</strong></td>
+                          <td>Deep Neural Networks</td>
+                          <td>4.0</td>
+                          <td>Prof. M. Chen</td>
+                          <td><span class="badge badge-success">100%</span></td>
+                          <td><span class="grade-pill high">A+</span></td>
+                        </tr>
+                        <tr>
+                          <td><strong>SE320</strong></td>
+                          <td>Cloud Native Systems & DevOps</td>
+                          <td>3.0</td>
+                          <td>Dr. K. Patel</td>
+                          <td><span class="badge badge-warning">91%</span></td>
+                          <td><span class="grade-pill high">A</span></td>
+                        </tr>
+                        <tr>
+                          <td><strong>HU205</strong></td>
+                          <td>Ethics in Artificial Intelligence</td>
+                          <td>2.0</td>
+                          <td>Prof. L. Howard</td>
+                          <td><span class="badge badge-success">96%</span></td>
+                          <td><span class="grade-pill med">B+</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Profile Sub-Tab 3: Guardian -->
+              <div class="profile-sub-section" id="ptab-guardian">
+                <div class="info-card">
+                  <h3 class="section-title"><i class="fa-solid fa-people-roof"></i> Primary Guardian & Family Details</h3>
+                  <div class="info-grid">
+                    <div class="info-item">
+                      <span class="info-label">Father / Guardian</span>
+                      <span class="info-value">Carlos Rivera</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Relationship</span>
+                      <span class="info-value">Father</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Guardian Phone</span>
+                      <span class="info-value">+1 (555) 789-2234</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Guardian Email</span>
+                      <span class="info-value">carlos.rivera@skyline.org</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Permanent Home Address</span>
+                      <span class="info-value">742 Evergreen Terrace, Springfield, OR 97477</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Emergency Protocol</span>
+                      <span class="info-value text-primary">Authorized Hospital & Campus Sign-off</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Profile Sub-Tab 4: History -->
+              <div class="profile-sub-section" id="ptab-history">
+                <div class="info-card">
+                  <h3 class="section-title"><i class="fa-solid fa-clock-rotate-left"></i> Recent Student Timeline</h3>
+                  <div class="timeline">
+                    <div class="timeline-entry">
+                      <div class="timeline-dot bg-indigo"></div>
+                      <div class="timeline-content">
+                        <strong>Submitted CS301 Algorithm Lab Assignment</strong>
+                        <p>Score: 98/100 • Automatic plagiarism check passed (0%)</p>
+                        <span class="time-meta">Oct 07, 2025 at 11:20 PM</span>
+                      </div>
+                    </div>
+                    <div class="timeline-entry">
+                      <div class="timeline-dot bg-emerald"></div>
+                      <div class="timeline-content">
+                        <strong>Attendance Marked Present</strong>
+                        <p>Biometric check verified at Lab 4 Terminal #12</p>
+                        <span class="time-meta">Oct 07, 2025 at 09:02 AM</span>
+                      </div>
+                    </div>
+                    <div class="timeline-entry">
+                      <div class="timeline-dot bg-amber"></div>
+                      <div class="timeline-content">
+                        <strong>Library Book Borrowed: Clean Architecture</strong>
+                        <p>Due date: Oct 21, 2025</p>
+                        <span class="time-meta">Oct 02, 2025 at 03:45 PM</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal: Enroll New Student -->
+  <div class="modal-overlay" id="enrollStudentModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-user-plus"></i> Enroll New Student</h3>
+        <button class="modal-close-btn" onclick="closeStudentModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="enrollStudentForm" onsubmit="handleEnrollStudent(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="newStudentName" required placeholder="e.g. Maya Lin">
+          </div>
+          <div class="form-group">
+            <label>Department / Major *</label>
+            <select id="newStudentDept" required>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Artificial Intelligence">Artificial Intelligence</option>
+              <option value="Data Science">Data Science</option>
+              <option value="Software Engineering">Software Engineering</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Roll Number *</label>
+            <input type="text" id="newStudentRoll" required placeholder="e.g. CS-2025-104">
+          </div>
+          <div class="form-group">
+            <label>Academic Year</label>
+            <select id="newStudentYear">
+              <option value="1st Year">1st Year (Freshman)</option>
+              <option value="2nd Year">2nd Year (Sophomore)</option>
+              <option value="3rd Year">3rd Year (Junior)</option>
+              <option value="4th Year">4th Year (Senior)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Student Email *</label>
+            <input type="email" id="newStudentEmail" required placeholder="maya.lin@university.edu">
+          </div>
+          <div class="form-group">
+            <label>Contact Phone</label>
+            <input type="text" id="newStudentPhone" placeholder="+1 (555) 000-0000">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeStudentModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Register Student</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification element -->
+  <div class="toast-notification" id="toastNotification">
+    <i class="fa-solid fa-circle-check toast-icon"></i>
+    <span class="toast-message" id="toastMessage">Attendance saved successfully!</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
